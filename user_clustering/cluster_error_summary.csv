@@ -1,0 +1,7 @@
+Cluster,compilation error,wrong answer,runtime error    (nzec),time limit exceeded,runtime error    ( sigxfsz ),runtime error    ( sigabrt ),runtime error    ( sigkill ),runtime error    ( sigsegv ),runtime error    ( sigfpe ),disqualified,internal error,"internal error
+
+
+	 (0)"
+0,0.705685618729097,1.7837235228539576,0.0,0.6510590858416946,0.0,0.0,0.0,0.0,0.0,0.010033444816053512,0.0011148272017837235,0.0011148272017837235
+1,19.5,74.5,0.0,30.5,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+2,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,10.0,0.0,0.0
