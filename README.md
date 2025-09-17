@@ -14,10 +14,14 @@
 - Detected when users were “stuck” (3+ consecutive failed submissions before an accepted one).
 - Results and visualizations of stuck users and problems are in the `stuck_prediction` folder.
 
+
 ### 4. Language-Specific Efficiency
 - Compared execution time and memory usage across languages for problems solved in 3 or more languages.
 - Outliers were excluded and ANOVA was used to test for significant differences.
 - Results and visualizations (boxplots, ANOVA results) are in the `language_efficiency` folder.
+- **Overall Comparison:**
+	- Mean and median execution time and memory usage for each language were computed across all problems (see `overall_language_efficiency.csv`).
+	- Barplots (`overall_mean_exec_time.png`, `overall_mean_memory.png`) provide a direct visual comparison of language efficiency across the entire dataset.
 
 ## How to Reproduce Analyses
 - Each analysis has its own folder with scripts and outputs.
