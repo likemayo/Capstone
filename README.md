@@ -23,6 +23,11 @@
 	- Mean and median execution time and memory usage for each language were computed across all problems (see `overall_language_efficiency.csv`).
 	- Barplots (`overall_mean_exec_time.png`, `overall_mean_memory.png`) provide a direct visual comparison of language efficiency across the entire dataset.
 
+### 5. Learner Classification (User Proficiency Modeling)
+- Users were classified into proficiency levels (beginner, intermediate, advanced) using both rule-based thresholds and unsupervised clustering (KMeans) on problem-solving and profile features.
+- Results include per-user proficiency level, cluster assignment, and summary visualizations.
+- Outputs: `learner_classification/learner_levels.csv` (user levels and clusters), `learner_classification/user_level_distribution.png` (level distribution plot).
+
 ## How to Reproduce Analyses
 - Each analysis has its own folder with scripts and outputs.
 - See the respective folders for details and to rerun or extend the analysis.

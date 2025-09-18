@@ -7,10 +7,12 @@ import seaborn as sns
 
 # Load cleaned data
 df = pd.read_csv('cleaned_for_analysis.csv')
-# Fill NaNs in relevant columns before aggregation
-for col in ['Problems_Solved', 'World_Rank', 'Solved_Classical_Count', 'Solved_Challenge_Count', 'Solved_Tutorial_Count', 'Solved_Partial_Count', 'Solved_Other_Count']:
+# Convert all relevant columns to numeric, coercing errors, then fill NaNs
+cols = ['Problems_Solved', 'World_Rank', 'Solved_Classical_Count', 'Solved_Challenge_Count', 'Solved_Tutorial_Count', 'Solved_Partial_Count', 'Solved_Other_Count']
+for col in cols:
     if col in df.columns:
-        df[col] = df[col].fillna(0)
+        df[col] = pd.to_numeric(df[col], errors='coerce').fillna(0)
+
 
 
 # Features for classification
@@ -23,9 +25,7 @@ user_stats = df.groupby('Username').agg({
     'Solved_Partial_Count': 'max',
     'Solved_Other_Count': 'max',
     'Language': pd.Series.nunique
-}).rename(columns={'Language': 'Language_Variety'})
-
-# Fill missing values after aggregation
+})
 user_stats = user_stats.fillna(0)
 
 # Rule-based classification
@@ -33,11 +33,11 @@ user_stats['Level'] = 'beginner'
 user_stats.loc[(user_stats['Problems_Solved'] >= 50) | (user_stats['World_Rank'] < 10000), 'Level'] = 'intermediate'
 user_stats.loc[(user_stats['Problems_Solved'] >= 200) | (user_stats['World_Rank'] < 2000), 'Level'] = 'advanced'
 
-
-# Clustering (optional, on problem mix and performance)
-X = user_stats[['Problems_Solved','World_Rank','Solved_Classical_Count','Solved_Challenge_Count','Solved_Tutorial_Count','Solved_Partial_Count','Solved_Other_Count','Language_Variety']]
-X = X.fillna(0)
-X_scaled = (X - X.mean()) / X.std()
+# Clustering (on problem mix and performance)
+from sklearn.preprocessing import StandardScaler
+X = user_stats[['Problems_Solved','World_Rank','Solved_Classical_Count','Solved_Challenge_Count','Solved_Tutorial_Count','Solved_Partial_Count','Solved_Other_Count','Language']].apply(pd.to_numeric, errors='coerce')
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
 kmeans = KMeans(n_clusters=3, random_state=42)
 user_stats['Cluster'] = kmeans.fit_predict(X_scaled)
 
